@@ -2,7 +2,9 @@ package com.bignerdranch.andrioid.geoquiz
 
 import Question
 import android.annotation.SuppressLint
+import android.nfc.Tag
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -18,6 +20,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.bignerdranch.andrioid.geoquiz.ui.theme.GeoQuizTheme
+
+private const val TAG = "MainActivity"
 
 class MainActivity : ComponentActivity() {
 
@@ -35,6 +39,7 @@ class MainActivity : ComponentActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate(Bundle? (called)")
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -55,6 +60,33 @@ class MainActivity : ComponentActivity() {
 
         updateQuestion()
     }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart() called")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume() called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause() called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop() called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestory() called")
+    }
+
+
     private fun updateQuestion(){
         val questionTextResId = questionBank[currentIndex].textResId
         binding.questionTextView.setText(questionTextResId)
@@ -73,4 +105,3 @@ class MainActivity : ComponentActivity() {
             .show()
     }
 }
-
